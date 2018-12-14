@@ -1,14 +1,13 @@
 #
 define sensu_standalone::check (
-  $command = undef,
-  $ensure = 'present',
-  $handlers = [],
-  $interval = 60,
-  $occurrences = undef,
-  $refresh = undef,
-  $source = undef,
-  $subscribers = [],
-  $standalone = undef,
+  $command              = undef,
+  $ensure               = 'present',
+  $interval             = $sensu_standalone::checks_defaults['interval'],
+  $occurrences          = $sensu_standalone::checks_defaults['occurrrences'],
+  $refresh              = $sensu_standalone::checks_defaults['refresh'],
+  $handlers             = $sensu_standalone::checks_defaults['handlers'],
+  $subscribers          = $sensu_standalone::checks_defaults['subscribers'],
+  $standalone           = $sensu_standalone::checks_defaults['standalone'],
 ) {
 
   $check_name = $title

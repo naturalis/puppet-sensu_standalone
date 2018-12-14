@@ -18,7 +18,7 @@ class sensu_standalone(
   $processes_to_check = [],
   $subscriptions      = ['appserver'],
   $handlers           = [ 'default'],
-    $checks_defaults    = {
+  $checks_defaults    = {
     interval      => 600,
     occurrences   => 3,
     refresh       => 60,

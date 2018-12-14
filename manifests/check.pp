@@ -3,7 +3,7 @@ define sensu_standalone::check (
   $command              = undef,
   $ensure               = 'present',
   $interval             = $sensu_standalone::checks_defaults['interval'],
-  $occurrences          = $sensu_standalone::checks_defaults['occurrrences'],
+  $occurrences          = $sensu_standalone::checks_defaults['occurrences'],
   $refresh              = $sensu_standalone::checks_defaults['refresh'],
   $handlers             = $sensu_standalone::checks_defaults['handlers'],
   $subscribers          = $sensu_standalone::checks_defaults['subscribers'],

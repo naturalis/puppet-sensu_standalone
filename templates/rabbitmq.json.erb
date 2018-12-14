@@ -1,0 +1,16 @@
+{
+  "rabbitmq": {
+    "ssl": {
+      "private_key_file": "/etc/ssl/rabbitmq_client_key.pem",
+      "cert_chain_file": "/etc/ssl/rabbitmq_client_cert.pem"
+    },
+    "port": 5671,
+    "host": "<%= scope.lookupvar("sensu_standalone::sensu_server") %>",
+    "user": "sensu",
+    "password": "<%= scope.lookupvar("sensu_standalone::rabbitmq_password") %>",
+    "vhost": "/sensu",
+    "reconnect_on_error": false,
+    "prefetch": 1
+  }
+}
+

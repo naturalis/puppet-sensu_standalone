@@ -1,0 +1,24 @@
+{
+  "client": {
+    "name": "<%= fqdn %>",
+    "address": "<%= ipaddress %>",
+    "subscriptions": [
+      <% @subscriptions.each do |subscription| -%>
+      "<%=subscription %>"
+      <% end -%>
+    ],
+    "socket": {
+      "bind": "127.0.0.1",
+      "port": 3030
+    },
+    "safe_mode": false,
+    "keepalive": {
+      "handlers": [
+        <% @handlers.each do |handler| -%>
+        "<%=handler %>"
+        <% end -%>
+      ]
+    }
+  }
+}
+

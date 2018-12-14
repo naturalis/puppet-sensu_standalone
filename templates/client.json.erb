@@ -3,7 +3,7 @@
     "name": "<%= @fqdn %>",
     "address": "<%= @ipaddress %>",
     "subscriptions": [
-      <% scope.lookupvar("sensu_standalone::subscriptions").each do |subscription| -%>
+      <% @subscriptions.each do |subscription| -%>
       "<%=subscription %>"
       <% end -%>
     ],
@@ -14,7 +14,7 @@
     "safe_mode": false,
     "keepalive": {
       "handlers": [
-        <% scope.lookupvar("sensu_standalone::handlers").each do |handler| -%>
+        <% @handlers.each do |handler| -%>
         "<%=handler %>"
         <% end -%>
       ]

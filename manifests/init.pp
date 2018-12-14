@@ -17,14 +17,14 @@ class sensu_standalone(
   $reboot_warning     = true,
   $processes_to_check = [],
   $subscriptions      = ['appserver'],
-  $checks_defaults    = {
+  $handlers           = [ 'default'],
+    $checks_defaults    = {
     interval      => 600,
     occurrences   => 3,
     refresh       => 60,
     handlers      => [ 'default'],
     subscribers   => ['appserver'],
     standalone    => true },
-
 ){
 
   $builtin_plugins = ['sensu-plugins-disk-checks', 'sensu-plugins-load-checks', 'sensu-plugins-process-checks' ]

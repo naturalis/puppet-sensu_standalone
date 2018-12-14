@@ -34,21 +34,6 @@ define sensu_standalone::check (
     fail("sensu_standalone::check{${name}}: a command must be given when ensure is present")
   }
 
-  if $subdue =~ Hash {
-    if !( has_key($subdue, 'days') and $subdue['days'] =~ Hash ){
-      fail("sensu_standalone::check{${name}}: subdue hash should have a proper format. (got: ${subdue}) See https://sensuapp.org/docs/latest/reference/checks.html#subdue-attributes")
-    }
-  }
-  if $proxy_requests {
-    if $proxy_requests =~ Hash {
-      if !( has_key($proxy_requests, 'client_attributes') ) {
-        fail("sensu_standalone::check{${name}}: proxy_requests hash should have a proper format.  (got: ${proxy_requests})  See https://sensuapp.org/docs/latest/reference/checks.html#proxy-requests-attributes")
-      }
-    } elsif !($proxy_requests == 'absent') {
-      fail("sensu_standalone::check{${name}}: proxy_requests must be a hash or 'absent' (got: ${proxy_requests})")
-    }
-  }
-
   $check_name = regsubst(regsubst($name, ' ', '_', 'G'), '[\(\)]', '', 'G')
 
   # If cron is specified, interval should not be written to the configuration
@@ -90,16 +75,6 @@ define sensu_standalone::check (
   # avoid realizing any resources.
   Anchor['plugins_before_checks']
   ~> Sensu_standalone::Check[$name]
-
-  if is_hash($hooks) {
-    $hooks.each |$k,$v| {
-      $valid_k = $k ? {
-        Integer[1,255]                                           => true,
-        Enum['ok', 'warning', 'critical', 'unknown', 'non-zero'] => true,
-        default => fail("Illegal value for ${k} hook. Valid values are: Integers from 1 to 255 and any of 'ok', 'warning', 'critical', 'unknown', 'non-zero'"),
-      }
-    }
-  }
 
   # This Hash map will ultimately exist at `{"checks" => {"$check_name" =>
   # $check_config}}`

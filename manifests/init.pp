@@ -97,7 +97,7 @@ class sensu_standalone(
 
   if $check_disk {
     sensu_standalone::check { 'check_disk_usage':
-      command     => "${ruby_run_comand} check-disk-usage.rb -w ${disk_warning} -c ${disk_critical} -x tmpfs,overlay,nsfs"
+      command     => "${ruby_run_comand} check-disk-usage.rb -w ${disk_warning} -c ${disk_critical} -x tmpfs,overlay,nsfs,tracefs"
     }
     sensu_standalone::check { 'check_disk_mounts':
       command     => "${ruby_run_comand} check-fstab-mounts.rb"

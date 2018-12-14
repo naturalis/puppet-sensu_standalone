@@ -86,7 +86,12 @@ class sensu_standalone(
   service { 'sensu-client':
     ensure     => 'running',
     enable     => true,
-    require    => [File['rabbitmq_config'],File['client_config'],File['sensu_daemon']]
+    require    => [File['rabbitmq_config'],
+                   File['client_config'],
+                   File['sensu_daemon'],
+                   File['/etc/ssl/rabbitmq_client_key.pem'],
+                   File['/etc/ssl/rabbitmq_client_cert.pem'],
+                  ]
   }
 
   if $reboot_warning {

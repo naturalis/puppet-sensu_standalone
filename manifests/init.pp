@@ -42,6 +42,12 @@ class sensu_standalone(
     require     => Class['sensu_standalone::install_apt_repo']
   }
 
+# apt-update exec
+exec { 'apt-update':
+  command     => '/usr/bin/apt update',
+  refreshonly => true,
+}
+
 # creating sensu rabbitmq config file
   file { 'rabbitmq_config':
     path    => '/etc/sensu/conf.d/rabbitmq.json',

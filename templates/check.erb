@@ -3,14 +3,14 @@
     "<%= @check_name -%>": {
       "command": "<%= @command -%>",
       "handlers": [
-      <% @handler.each do |handler| -%>
+      <% @handlers.each do |handler| -%>
         "<%=handler %>"
       <% end -%>
       ],
       "interval": <%= @interval -%>,
       "occurrences": <%= @occurrences -%>,
       "refresh": <%= @refresh -%>,
-      "standalone": true,
+      "standalone": <%= @standalone -%>,
       "subscribers": [
       <% @subscribers.each do |subscription| -%>
         "<%=subscription %>"

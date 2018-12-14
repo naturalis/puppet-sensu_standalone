@@ -8,6 +8,7 @@ define sensu_standalone::check (
   $refresh = undef,
   $source = undef,
   $subscribers = [],
+  $standalone = undef,
 ) {
 
   $check_name = $title

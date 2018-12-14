@@ -62,7 +62,6 @@ class sensu_standalone(
 
   service { 'sensu-client':
     ensure     => 'running',
-    enabled    => 'true',
     require    => [File['rabbitmq_config'],File['client_config']]
   }
 

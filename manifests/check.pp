@@ -53,7 +53,7 @@ define sensu_standalone::check (
   # This Hash map will ultimately exist at `{"checks" => {"$check_name" =>
   # $check_config}}`
   $check_config_start = {
-    type                => $type,
+    'type'              => $type
     standalone          => $standalone,
     command             => $command,
     handlers            => $handlers,

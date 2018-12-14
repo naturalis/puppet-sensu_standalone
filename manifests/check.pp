@@ -80,15 +80,6 @@ define sensu_standalone::check (
     auto_resolve        => $auto_resolve,
   }
 
-  # Remove key/value pares where the value is `undef` or `"absent"`.
-  $check_config_pruned = $check_config_start.reduce({}) |$memo, $kv| {
-    $kv[1] ? {
-      undef    => $memo,
-      'absent' => $memo,
-      default  => $memo + Hash.new($kv),
-    }
-  }
-
   # Merge the specified properties on top of the custom hash.
   if $custom == undef {
     $check_config = $check_config_pruned
@@ -97,8 +88,6 @@ define sensu_standalone::check (
   }
 
   # Merge together the "checks" scope with any arbitrary config specified via
-  # `content`.
-  $checks_scope_start = { $check_name => $check_config }
   if $content['checks'] == undef {
     $checks_scope = { 'checks' => $checks_scope_start }
   } else {
@@ -118,3 +107,4 @@ define sensu_standalone::check (
     notify      => Service['sensu-client'],
   }
 }
+

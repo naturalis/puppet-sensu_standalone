@@ -66,9 +66,16 @@ exec { 'apt-update':
     require => Package['sensu'],
   }
 
+# creating sensu daemon config file
+  file { 'sensu_daemon':
+    path    => '/etc/default/sensu',
+    mode    => '0444',
+    content => template('sensu_standalone/sensu.erb'),
+  }
+
   service { 'sensu-client':
     ensure     => 'running',
-    require    => [File['rabbitmq_config'],File['client_config']]
+    require    => [File['rabbitmq_config'],File['client_config'],File['sensu_daemon']]
   }
 
 # Sensu check defaults

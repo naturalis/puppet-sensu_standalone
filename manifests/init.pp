@@ -12,8 +12,9 @@ class sensu_standalone(
   $disk_warning       = 85,
   $disk_critical      = 95,
   $check_load         = true,
-  $load_warning       = '0.99,0.95,0.9',
-  $load_critical      = '0.99,0.99,0.95',
+  $load_warning       = '0.6,0.55,0.5',  # only used when load auto = false
+  $load_critical      = '0.99,0.95,0.90', # only used when load auto = false
+  $load_auto          = true,
   $reboot_warning     = true,
   $processes_to_check = [],
   $subscriptions      = ['appserver'],

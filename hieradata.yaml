@@ -1,0 +1,36 @@
+sensu_standalone::check_disk: true
+sensu_standalone::check_load: true
+sensu_standalone::checks: {}
+sensu_standalone::checks_defaults::handlers:
+  - default
+sensu_standalone::checks_defaults::interval: 600
+sensu_standalone::checks_defaults::occurrences: 3
+sensu_standalone::checks_defaults::refresh: 60
+sensu_standalone::checks_defaults::standalone: true
+sensu_standalone::checks_defaults::subscribers:
+  - appserver
+sensu_standalone::client_cert: |
+  -----BEGIN CERTIFICATE-----
+  CLIENT CERT HERE
+  -----END CERTIFICATE-----
+sensu_standalone::client_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  CLIENT PRIV KEY HERE
+  -----END RSA PRIVATE KEY-----
+sensu_standalone::disk_critical: 95
+sensu_standalone::disk_warning: 85
+sensu_standalone::handler_definitions: {}
+sensu_standalone::keep_alive_handlers:
+  - default
+sensu_standalone::load_critical: 0.99,0.95,0.9
+sensu_standalone::load_warning: 0.6,0.55,0.5
+sensu_standalone::plugins:
+  - default
+sensu_standalone::processes_to_check:
+  - cron
+sensu_standalone::rabbitmq_password: rabbitmqpasswd
+sensu_standalone::reboot_warning: true
+sensu_standalone::sensu_server: sensuserver.address.here
+sensu_standalone::subscriptions:
+  - appserver
+

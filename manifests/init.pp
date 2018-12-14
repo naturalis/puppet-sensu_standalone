@@ -67,14 +67,14 @@ class sensu_standalone(
   }
 
 # Sensu check defaults
-  sensu_standalone::Check {
-    interval    => $checks_defaults['interval'],
-    occurrences => $checks_defaults['occurrrences'],
-    refresh     => $checks_defaults['refresh'],
-    handlers    => $checks_defaults['handlers'],
-    subscribers => $checks_defaults['subscribers'],
-    standalone  => $checks_defaults['standalone'],
-  }
+#  sensu_standalone::Check {
+#    interval    => $checks_defaults['interval'],
+#    occurrences => $checks_defaults['occurrrences'],
+#    refresh     => $checks_defaults['refresh'],
+#    handlers    => $checks_defaults['handlers'],
+#    subscribers => $checks_defaults['subscribers'],
+#    standalone  => $checks_defaults['standalone'],
+#  }
 
   if $reboot_warning {
     sensu_standalone::check { 'check_reboot_required':

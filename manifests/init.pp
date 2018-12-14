@@ -30,6 +30,7 @@ class sensu_standalone(
   $builtin_plugins = ['sensu-plugins-disk-checks', 'sensu-plugins-load-checks', 'sensu-plugins-process-checks' ]
   $ruby_run_comand = '/opt/sensu/embedded/bin/ruby -C/opt/sensu/embedded/bin'
 
+
 # install client keys
   sensu_standalone::keys::client { 'client_keys' :
     private => $client_key,
@@ -43,10 +44,18 @@ class sensu_standalone(
   }
 
 # apt-update exec
-exec { 'apt-update':
-  command     => '/usr/bin/apt update',
-  refreshonly => true,
-}
+  exec { 'apt-update':
+    command     => '/usr/bin/apt update',
+    refreshonly => true,
+  }
+
+# create checks dir
+  file { '/etc/sensu/conf.d/checks':
+    ensure  => 'directory',
+    mode    => '0750',
+    group   => 'sensu',
+    require => Package['sensu'],
+  }
 
 # creating sensu rabbitmq config file
   file { 'rabbitmq_config':

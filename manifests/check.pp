@@ -20,6 +20,7 @@ define sensu_standalone::check (
     group       => 'sensu',
     mode        => '400',
     notify      => Service['sensu-client'],
+    require     => File['/etc/sensu/conf.d/checks']
   }
 }
 

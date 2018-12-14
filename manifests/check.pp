@@ -45,32 +45,6 @@ define sensu_standalone::check (
 
   $file_mode = '0440'
 
-  case $handlers {
-    Pattern[/absent/]: { $handlers_array = undef }
-    String:   { $handlers_array = [ $handlers ] }
-    default:  { $handlers_array = $handlers }
-  }
-  case $subscribers {
-    Pattern[/absent/]: { $subscribers_array = undef }
-    String:   { $subscribers_array = [ $subscribers ] }
-    default:  { $subscribers_array = $subscribers }
-  }
-  case $aggregates {
-    Pattern[/absent/]: { $aggregates_array = undef }
-    String:   { $aggregates_array = [ $aggregates ] }
-    default:  { $aggregates_array = $aggregates }
-  }
-  case $contacts {
-    Pattern[/absent/]: { $contacts_array = undef }
-    String:   { $contacts_array = [ $contacts ] }
-    default:  { $contacts_array = $contacts }
-  }
-  case $dependencies {
-    Pattern[/absent/]: { $dependencies_array = undef }
-    String:   { $dependencies_array = [ $dependencies ] }
-    default:  { $dependencies_array = $dependencies }
-  }
-
   # (#463) All plugins must come before all checks.  Collections are not used to
   # avoid realizing any resources.
   Anchor['plugins_before_checks']
@@ -82,22 +56,22 @@ define sensu_standalone::check (
     type                => $type,
     standalone          => $standalone,
     command             => $command,
-    handlers            => $handlers_array,
-    contacts            => $contacts_array,
+    handlers            => $handlers,
+    contacts            => $contacts,
     cron                => $cron,
     interval            => $interval_real,
     occurrences         => $occurrences,
     refresh             => $refresh,
     source              => $source,
-    subscribers         => $subscribers_array,
+    subscribers         => $subscribers,
     low_flap_threshold  => $low_flap_threshold,
     high_flap_threshold => $high_flap_threshold,
     timeout             => $timeout,
     aggregate           => $aggregate,
-    aggregates          => $aggregates_array,
+    aggregates          => $aggregates,
     handle              => $handle,
     publish             => $publish,
-    dependencies        => $dependencies_array,
+    dependencies        => $dependencies,
     subdue              => $subdue,
     proxy_requests      => $proxy_requests,
     hooks               => $hooks,

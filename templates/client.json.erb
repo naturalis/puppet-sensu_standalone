@@ -1,9 +1,9 @@
 {
   "client": {
-    "name": "<%= fqdn %>",
-    "address": "<%= ipaddress %>",
+    "name": "<%= @fqdn %>",
+    "address": "<%= @ipaddress %>",
     "subscriptions": [
-      <% @subscriptions.each do |subscription| -%>
+      <% scope.lookupvar("sensu_standalone::subscriptions").each do |subscription| -%>
       "<%=subscription %>"
       <% end -%>
     ],
@@ -14,7 +14,7 @@
     "safe_mode": false,
     "keepalive": {
       "handlers": [
-        <% @handlers.each do |handler| -%>
+        <% scope.lookupvar("sensu_standalone::handlers").each do |handler| -%>
         "<%=handler %>"
         <% end -%>
       ]

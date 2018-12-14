@@ -21,7 +21,7 @@ define sensu_standalone::write_json (
     owner   => $owner,
     group   => $group,
     mode    => $mode,
-    content => sensu_sorted_json($content, $pretty),
+    content => $content,
     notify  => $notify_list,
   }
 }

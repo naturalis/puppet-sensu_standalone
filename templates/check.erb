@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "<%= @check_name -%>": {
+      "command": "<%= @command -%>",
+      "handlers": [
+        <% @handler.each do |handler| -%>
+      "<%=handler %>"
+      <% end -%>
+
+        "default"
+      ],
+      "interval": <%= @interval -%>,
+      "occurrences": <%= @occurrences -%>,
+      "refresh": <%= @refresh -%>,
+      "standalone": true,
+      "subscribers": [
+      <% @subscribers.each do |subscription| -%>
+        "<%=subscription %>"
+      <% end -%>
+      ]
+    }
+  }
+}
+
+

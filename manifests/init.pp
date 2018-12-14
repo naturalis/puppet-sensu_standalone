@@ -85,18 +85,9 @@ class sensu_standalone(
 
   service { 'sensu-client':
     ensure     => 'running',
+    enable     => true,
     require    => [File['rabbitmq_config'],File['client_config'],File['sensu_daemon']]
   }
-
-# Sensu check defaults
-#  sensu_standalone::Check {
-#    interval    => $checks_defaults['interval'],
-#    occurrences => $checks_defaults['occurrrences'],
-#    refresh     => $checks_defaults['refresh'],
-#    handlers    => $checks_defaults['handlers'],
-#    subscribers => $checks_defaults['subscribers'],
-#    standalone  => $checks_defaults['standalone'],
-#  }
 
   if $reboot_warning {
     sensu_standalone::check { 'check_reboot_required':

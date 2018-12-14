@@ -3,11 +3,9 @@
     "<%= @check_name -%>": {
       "command": "<%= @command -%>",
       "handlers": [
-        <% @handler.each do |handler| -%>
-      "<%=handler %>"
+      <% @handler.each do |handler| -%>
+        "<%=handler %>"
       <% end -%>
-
-        "default"
       ],
       "interval": <%= @interval -%>,
       "occurrences": <%= @occurrences -%>,

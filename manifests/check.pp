@@ -2,12 +2,12 @@
 define sensu_standalone::check (
   $command = undef,
   $ensure = 'present',
-  $handlers = undef,
+  $handlers = [],
   $interval = 60,
   $occurrences = undef,
   $refresh = undef,
   $source = undef,
-  $subscribers = undef,
+  $subscribers = [],
 ) {
 
   $check_name = $title

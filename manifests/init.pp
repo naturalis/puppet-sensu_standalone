@@ -39,7 +39,7 @@ class sensu_standalone(
 # install sensu 
   class { 'sensu_standalone::install_apt_repo': }
   package { 'sensu':
-    require     => Class['sensu_standalone::install_apt_repo':]
+    require     => Class['sensu_standalone::install_apt_repo']
   }
 
 # creating sensu rabbitmq config file
@@ -66,8 +66,6 @@ class sensu_standalone(
     require    => [File['rabbitmq_config'],File['client_config']]
   }
 
-
-
 # Sensu check defaults
   sensu_standalone::Check {
     interval    => $checks_defaults['interval'],
@@ -77,7 +75,6 @@ class sensu_standalone(
     subscribers => $checks_defaults['subscribers'],
     standalone  => $checks_defaults['standalone'],
   }
-
 
   if $reboot_warning {
     sensu_standalone::check { 'check_reboot_required':

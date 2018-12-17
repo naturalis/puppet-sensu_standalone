@@ -121,6 +121,10 @@ class sensu_standalone(
     }
   }
 
+  if $checks {
+    create_resources( 'sensu_standalone::check', $checks )
+  }
+
   $plugin_array = unique(concat($plugins, $builtin_plugins))
   sensu_standalone::plugin_installer { $plugin_array : }
 

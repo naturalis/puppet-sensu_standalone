@@ -14,7 +14,9 @@ class sensu_standalone(
   $check_load         = true,
   $load_warning       = '0.6,0.55,0.5',  # only used when load auto = false
   $load_critical      = '0.99,0.95,0.90', # only used when load auto = false
-  $load_auto          = true,
+  $check_memory       = true,
+  $memory_pct_warning = '80',
+  $memory_pct_critical= '90',
   $reboot_warning     = true,
   $processes_to_check = [],
   $subscriptions      = ['appserver'],
@@ -28,7 +30,7 @@ class sensu_standalone(
     standalone    => true },
 ){
 
-  $builtin_plugins = ['sensu-plugins-disk-checks', 'sensu-plugins-load-checks', 'sensu-plugins-process-checks' ]
+  $builtin_plugins = ['sensu-plugins-disk-checks', 'sensu-plugins-load-checks', 'sensu-plugins-process-checks','sensu-plugins-memory-checks' ]
   $ruby_run_comand = '/opt/sensu/embedded/bin/ruby -C/opt/sensu/embedded/bin'
 
 
@@ -118,6 +120,12 @@ class sensu_standalone(
   if size($processes_to_check) > 0 {
     sensu_standalone::check_process_installer { $processes_to_check :
       checks_defaults => $checks_defaults,
+    }
+  }
+
+  if $check_memory {
+    sensu::check { 'check_memory':
+      command     => "${ruby_run_comand} check-memory-percent.rb -w ${memory_pct_warning} -c ${memory_pct_critical}"
     }
   }
 

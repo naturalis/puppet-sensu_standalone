@@ -124,7 +124,7 @@ class sensu_standalone(
   }
 
   if $check_memory {
-    sensu::check { 'check_memory':
+    sensu_standalone::check { 'check_memory':
       command     => "${ruby_run_comand} check-memory-percent.rb -w ${memory_pct_warning} -c ${memory_pct_critical}"
     }
   }
